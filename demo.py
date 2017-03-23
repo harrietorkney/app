@@ -138,7 +138,9 @@ def day_hungry(message):
 		emit("answer4", response)
 
 def day_food_restaurant():
-	return ["Let me see what I can find..."]
+	global scenario
+	scenario = 'day_food_restaurant'
+	return ["Press that red button and I will see what I can find..."]
 
 def daythirsty():
 	return ["are u thirsty?"]
@@ -161,7 +163,7 @@ def night_hungry(message):
 def night_food():
 	global scenario
 	scenario = 'night_food'
-	return ['ok let me think']
+	return ['ok let me think', 'Hit the red button!']
 
 def nightthirsty():
 	return ["are u thirsty?"]
@@ -190,7 +192,10 @@ def day_thirsty(message):
 		emit("answer5", response)
 
 def day_drinks():
-	return ["OK... let me see what I can find"]
+	global scenario
+	scenario = 'day_drinks'
+	return ["Not a problem", "Try the red button for some ideas"]
+
 def cultured_or_not():
 	return["are u feeling C.U.L.T.U.R.E.D?"]
 
@@ -211,7 +216,9 @@ def night_thirsty(message):
 		emit ('answer5', response)
 
 def day_bad_weather_1():
-	return ["no problemo, i'm sure i can find something"]
+	global scenario
+	scenario = 'day_bad_weather_1'
+	return ["OK, ok...", "click the big red button and i'll see what I can find"]
 
 def club_or_bar():
 	return ["do u wanna dance as well?"]
@@ -260,9 +267,14 @@ def cluborbar(message):
 		emit('answer6', response)
 
 def night_bar():
-	return ["OK no problem, let me have a quick look..."]
+	global scenario
+	scenario = 'night_bar'
+	return ["Just some casual drinks then...", "Hit that red button"]
+
 def night_club():
-	return ["good for you, let's find you some options!"]
+	global scenario
+	scenario = 'night_club'
+	return ["Good for you you party animal", "Try the red button and I'll show you some options..."]
 
 @socketio.on('answer7')
 def day_user_not_thirsty(message):
@@ -284,9 +296,6 @@ def weather(message):
 
 def day_good_weather():
 	return ["great, let's see now..."]
-
-
-
 
     
   # print('received json: ' + str(json))

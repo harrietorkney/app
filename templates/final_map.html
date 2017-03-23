@@ -32,6 +32,15 @@
 		});
 		marker.setMap(map);
 
+		var latlng = new google.maps.LatLng(53.366312, -1.507014);
+		var img = new google.maps.MarkerImage('http://chart.apis.google.com/chart?cht=mm&chs=12x16&chco=FFFFFF,0000FF,000000&ext=.png');
+		var marker = new google.maps.Marker({
+		title: "Ambar Tandoori",
+		icon: img,
+		position: latlng
+		});
+		marker.setMap(map);
+
 		var latlng = new google.maps.LatLng(53.367530, -1.499232);
 		var img = new google.maps.MarkerImage('http://chart.apis.google.com/chart?cht=mm&chs=12x16&chco=FFFFFF,0000FF,000000&ext=.png');
 		var marker = new google.maps.Marker({
