@@ -6,12 +6,19 @@ import os
 import shutil
 
 from googleplaces import GooglePlaces, types, lang
-from key import key # You'll need to change this to your own google API key
+from key import key 
 import pygmaps
 
   
 scenario = ''
 session = ''
+KEYWORD = 'cafe'
+KEYWORD2 = 'cafe'
+TYPES = [types.TYPE_FOOD]
+TYPES2 = [types.TYPE_FOOD]
+rating = 3
+
+
 view = 0
 
 
@@ -75,8 +82,6 @@ def what():
 
 	return ["Dunno what ur saying to me!"]
 
-
-
 	# elif i == 2:
 	# 	return dead()
 
@@ -126,11 +131,11 @@ def is_user_hungry(message):
 def day_hungry(message):
 	global session
 	if message in ["yes", "yeah", "sure", "why not"]:
-		session = "day"
+		# session = "day"
 		response = day_food_restaurant()
 		emit("answer4", response)
 	elif message in ["no", "nah", "nope", "no thanks"]:
-		session = "day"
+		# session = "day"
 		response = daythirsty()
 		emit("answer4", response)
 	else:
@@ -268,21 +273,23 @@ def cluborbar(message):
 
 def night_bar():
 	global scenario
+	global view
 	scenario = 'night_bar'
 	return ["Just some casual drinks then...", "Hit that red button"]
 
 def night_club():
 	global scenario
+	global view
+	view =1
 	scenario = 'night_club'
 	return ["Good for you you party animal", "Try the red button and I'll show you some options..."]
 
+# def day_user_not_thirsty(message):
+# 	# # global session
+# 	# if session == "day":
+# 	weather_ok(message)
+
 @socketio.on('answer7')
-def day_user_not_thirsty(message):
-	# global session
-	if session == "day":
-		weather_ok(message)
-
-
 def weather(message):
 	if message == "yes":
 		response = day_good_weather()
@@ -297,10 +304,9 @@ def weather(message):
 def day_good_weather():
 	return ["great, let's see now..."]
 
-    
-  # print('received json: ' + str(json))
-google_places = GooglePlaces(key)
 
+
+google_places = GooglePlaces(key)
 # This is the variable you change depending on outcome
 LOCATION = '53.3743452,-1.4980395' # sheffield uni
 RADIUS = 2000 # I've just put this as default distance from uni (in metres)
@@ -325,7 +331,7 @@ if scenario == 'day_food_cafe':
     KEYWORD = 'cafe'
     TYPES = [types.TYPE_FOOD]
     rating = 4
-elif scenario == 'day_food_restaurant' or 'night_food':
+elif scenario == 'day_food_restaurant' or scenario =='night_food':
     KEYWORD = 'restaurant'
     TYPES = [types.TYPE_FOOD]
     rating = 4
@@ -333,13 +339,13 @@ elif scenario == 'day_drinks':
     KEYWORD = 'pub'
     TYPES = [types.TYPE_BAR]
     rating = 4
-elif scenario == 'day_culture' or 'day_bad_weather_2':
+elif scenario == 'day_culture' or  scenario =='day_bad_weather_2':
     KEYWORD = 'museum'
     TYPES = [types.TYPE_MUSEUM]
     rating = 4
     KEYWORD2 = 'art'
     TYPES2 = [types.TYPE_ART_GALLERY]
-elif scenario == 'day_bad_weather_1' or 'night_cinema':
+elif scenario == 'day_bad_weather_1' or scenario == 'night_cinema':
     KEYWORD = 'cinema'
     TYPES = [types.TYPE_MOVIE_THEATER]
     rating = 2
@@ -394,8 +400,6 @@ if scenario == 'day_culture' or scenario == 'day_bad_weather_2':
 
 # The file ends up in whatever folder this script is saved in -- need to figure out
 # how to make this map appear in a browser tab. Ask demonstraters this.
-
-
 mymap.draw('./map.html')
 
 count = 0
@@ -409,20 +413,24 @@ with open('final_map.html', 'w') as file:
 file.close()
 shutil.move('final_map.html', './templates/final_map.html')
 
-if os.path.exists('./templates/final_map.html'):
-	view = 1
-else: view =0	
+#if os.path.exists('./templates/final_map.html'):
+#	view = 1
+#else: view =0	
 
-if view == 1:
-	@app.route("/map")
-	def viewmap():
-		return render_template("final_map.html")
+#if view == 1:
+@app.route("/map")
+def viewmap():
+	return render_template("final_map.html")
+
+
+
 
 if __name__ == '__main__':
     socketio.run(app, debug=True)
 
-
-
-
+# if 'PORT' in os.environ:
+#      app.run(host='0.0.0.0', port=int(os.environ['PORT']))
+# else:
+#      app.run(debug=True)
 
 
