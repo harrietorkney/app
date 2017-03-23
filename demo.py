@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, session
 from sys import exit
 from flask_socketio import SocketIO, emit
-import webbrowser
 import os
 import shutil
 
@@ -305,8 +304,7 @@ def day_good_weather():
 	return ["great, let's see now..."]
 
 
-
-google_places = GooglePlaces(key)
+google_places = GooglePlaces(os.environ[‘KEY’])
 # This is the variable you change depending on outcome
 LOCATION = '53.3743452,-1.4980395' # sheffield uni
 RADIUS = 2000 # I've just put this as default distance from uni (in metres)
@@ -428,9 +426,9 @@ def viewmap():
 if __name__ == '__main__':
     socketio.run(app, debug=True)
 
-# if 'PORT' in os.environ:
-#      app.run(host='0.0.0.0', port=int(os.environ['PORT']))
-# else:
-#      app.run(debug=True)
+if 'PORT' in os.environ:
+     app.run(host='0.0.0.0', port=int(os.environ['PORT']))
+else:
+     app.run(debug=True)
 
 
