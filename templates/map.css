@@ -22,7 +22,7 @@ body {
     padding: 10px;
     box-sizing: border-box;
     position: relative;
-    overflow: hidden;
+    overflow: scroll;
 }
 
 .header{
@@ -42,6 +42,7 @@ body {
     border: 1px solid #444;
     background: #222;
 }
+
 .home-btn .hb-square{
     background: none;
     width: 23px;
@@ -102,7 +103,7 @@ body {
 }
 
 .new-chat{
-    position: absolute;
+    position: relative;
     bottom: 0px;
     width: 100%;
     background: #ededed;
