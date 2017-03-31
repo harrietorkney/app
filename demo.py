@@ -306,7 +306,7 @@ def weather(message):
 def day_good_weather():
 	return ["great, let's see now..."]
 
-google_places = GooglePlaces(os.environ[‘KEY’])
+google_places = GooglePlaces(os.environ[KEY])
 
 # This is the variable you change depending on outcome
 LOCATION = '53.3743452,-1.4980395' # sheffield uni
