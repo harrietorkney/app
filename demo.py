@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from flask import Flask, render_template, request, session
 from sys import exit
 from flask_socketio import SocketIO, emit
@@ -19,6 +21,7 @@ rating = 3
 
 
 view = 0
+
 
 
 if os.path.exists('./templates/final_map.html'):
